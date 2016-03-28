@@ -10,4 +10,4 @@ python:
   - "nightly" # currently points to 3.6-dev
 # command to install dependencies
 # command to run tests
-script: python testtesttest/test.py
+script: python testtesttest/test.py 
