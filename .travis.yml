@@ -10,4 +10,4 @@ before_install:
   - export PATH=$PATH:$PWD/geckodriver
   - pip install reuirements.txt
 
-script: python -m unittest test.py
+script: python test.py
