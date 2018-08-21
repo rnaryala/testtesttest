@@ -1,4 +1,4 @@
-﻿import math
+import math
 import unittest
 import xmlrunner
 from ddt import ddt, file_data
@@ -16,26 +16,26 @@ class TestStringMethods(unittest.TestCase):
         options.add_argument('-headless')
         self.driver = webdriver.Firefox(options=options)
         self.page = MainPage(self.driver)
-        self.page.open("https://google.com/")
+        self.page.open("https://google.ru/")
 
-    # def test_title(self):
-    #     title = self.driver.title
-    #     self.assertEqual(title, 'Google')
+    def test_title(self):
+        title = self.driver.title
+        self.assertEqual(title, 'Google')
 
     def test_button_value(self):
         button = self.page.search_form.get_button_name()
         self.assertEqual(button, 'Поиск в Google')
 
-    # def test_isupper(self):
-    #     self.assertTrue('FOO'.isupper())
-    #
-    # @file_data('test_sqrt_data.json')
-    # def test_sqrt(self, value, result):
-    #     print(result)
-    #     self.assertEqual(math.sqrt(value), result)
-    #
-    # def test_upper(self):
-    #     self.assertEqual('foo'.upper(), 'FOO')
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+    
+    @file_data('test_sqrt_data.json')
+    def test_sqrt(self, value, result):
+        print(result)
+        self.assertEqual(math.sqrt(value), result)
+    
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
 
 
 if __name__ == '__main__':
