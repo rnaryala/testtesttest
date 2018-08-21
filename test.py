@@ -24,7 +24,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_button_value(self):
         button = self.page.search_form.get_button_name()
-        self.assertEqual(button, 'Поиск в Google')
+        self.assertEqual(button, 'Google Search')
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
