@@ -1,40 +1,43 @@
-from mainLion import Lion
-from unittest import TestCase
+import math
 import unittest
+import xmlrunner
+from ddt import ddt, file_data
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from main_page import MainPage
 
-class LionTest (TestCase) :
-    def test_init (self) :
-        res = Lion(1, "hunter")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("run", res.action, "wrong")
 
-        res = Lion(1, "antelope")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("sleep", res.action, "wrong")
+@ddt
+class TestStringMethods(unittest.TestCase):
+    page = None
 
-        res = Lion(1, "tree")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("look", res.action, "wrong")
+    def setUp(self):
+        options = Options()
+        options.add_argument('-headless')
+        self.driver = webdriver.Firefox(options=options)
+        self.page = MainPage(self.driver)
+        self.page.open("https://google.ru/")
 
-        res = Lion(1, "rabbit")
-        self.assertEqual(1, res.state, "wrong")
-        self.assertEqual("error", res.action, "wrong")
+    def test_title(self):
+        title = self.driver.title
+        self.assertEqual(title, 'Google')
 
-        res = Lion(0, "hunter")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("run", res.action, "wrong")
+    def test_button_value(self):
+        button = self.page.search_form.get_button_name()
+        self.assertEqual(button, 'Google Search')
 
-        res = Lion(0, "antelope")
-        self.assertEqual(1, res.state, "wrong")
-        self.assertEqual("eat", res.action, "wrong")
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+    
+    @file_data('test_sqrt_data.json')
+    def test_sqrt(self, value, result):
+        print(result)
+        self.assertEqual(math.sqrt(value), result)
+    
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
 
-        res = Lion(0, "tree")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("sleep", res.action, "wrong")
 
-        res = Lion(0, "rabbit")
-        self.assertEqual(0, res.state, "wrong")
-        self.assertEqual("error", res.action, "wrong")
-
-    if __name__ == '__main__' :
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=xmlrunner.XMLTestRunner(output='reports'))
