@@ -1,3 +1,1 @@
-test exmpl
-.. image:: https://travis-ci.org/rnaryala/testtesttest.svg?branch=exmpl
-    :target: https://travis-ci.org/rnaryala/testtesttest
+[![Build Status](https://travis-ci.org/rnaryala/testtesttest.svg?branch=master)](https://travis-ci.org/rnaryala/testtesttest)
