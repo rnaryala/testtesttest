@@ -1,10 +1,15 @@
 language: python
+addons:
+  firefox: "61.0.2"
 python:
-  - "3.4"
-  - "3.5-dev" # 3.5 development branch
-  - "nightly" # currently points to 3.6-dev
-
-# command to install dependencies
-
-# command to run tests
-script: python -m unittest test.py
+  - "3.7-dev"
+before_install:
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.21.0-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+  - pip install --upgrade -r requirements.txt
+branches:
+  only:
+    - exmpl
+script: python test.py
